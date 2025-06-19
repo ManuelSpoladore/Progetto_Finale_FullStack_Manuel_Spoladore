@@ -6,6 +6,9 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type");
+
 
 if (!isset($_ENV['JWT_SECRET'])) {
     echo json_encode(['success' => false, 'message' => 'Chiave segreta JWT non configurata']);

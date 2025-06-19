@@ -2,13 +2,11 @@ import React, { useState } from "react";
 import { useUser } from "../../contexts/UserContext";
 import { getToken } from "../../utils/tokenStorage";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 export default function PostForm() {
   const { user } = useUser();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,7 +22,7 @@ export default function PostForm() {
 
 
     try {
-      const res = await axios.post("/api/create-post.php", payload, {
+      const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/create-post.php`, payload, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

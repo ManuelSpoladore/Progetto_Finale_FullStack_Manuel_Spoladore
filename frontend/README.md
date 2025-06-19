@@ -205,22 +205,25 @@ INSERT INTO faculties (name, university_id) VALUES
 ---
 
 ## 🚧 Sviluppi Futuri
+- [ ] Verifica della mail nella propria casella mail e possibilità di aggiornare i propri dati, dalla password alla propria università
+
+- [ ] Possibilità di modificare i propri post e pubblicare materiale
+
+- [ ] Filtro per materie dei corsi di laurea
+
+- [ ] Aggiunta di un metodo di caricamento degli articoli tramite API
+
+- [ ] Aggiunta di un test simil AlphaTest per aiutare gli studenti a capire i propri gusti di studio
+
+- [ ] Aggiunta di una sezione “Futuro Lavoro” dove saranno presenti i lavori che un determinato corso di laurea ha portato a svolgere, per   orientare al meglio le persone, con un filtro ad esempio su quanti soldi si guadagnano e in che regione lo si svolge  
 
 - [ ] Sistema di notifiche real-time
+
 - [ ] Chat privata tra utenti
+
 - [ ] Sistema di valutazione corsi
-- [ ] Integrazione calendario eventi universitari
+
 - [ ] Mobile app con React Native
-
----
-
-## 🤝 Contribuire
-
-1. Fork del progetto
-2. Crea il tuo feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit delle modifiche (`git commit -m 'Add some AmazingFeature'`)
-4. Push al branch (`git push origin feature/AmazingFeature`)
-5. Apri una Pull Request
 
 ---
 
@@ -232,6 +235,6 @@ Distribuito sotto licenza MIT. Vedi `LICENSE` per maggiori informazioni.
 
 ## 📞 Contatti
 
-- **Progetto**: [Scuola Ribelle](https://github.com/username/scuola-ribelle)
-- **Autore**: Il tuo nome
-- **Email**: tua-email@esempio.
+- **Progetto**: [Scuola Ribelle](https://github.com/ManuelSpoladore/Progetto_Finale_FullStack_Manuel_Spoladore)
+- **Autore**: Manuel Spoladore
+- **Email**: manuelspoladore@gmail.com

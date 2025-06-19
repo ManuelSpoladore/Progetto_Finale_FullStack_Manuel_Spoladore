@@ -46,7 +46,7 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/register.php", formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register.php`, formData);
       if (response.data.success) {
         setMessage("Registrazione completata! Verrai reindirizzato al Login");
         const timer = setTimeout(() => {

@@ -13,7 +13,7 @@ export default function UserProvider({ children }) {
     if (!token) return;
 
     axios
-      .get("/api/get-user-profile.php", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/get-user-profile.php`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {

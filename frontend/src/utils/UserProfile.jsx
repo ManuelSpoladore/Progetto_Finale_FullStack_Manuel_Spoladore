@@ -11,7 +11,6 @@ export default function UserProfile() {
 
   useEffect(() => {
     const token = getToken();
-    console.log("🔑 Token recuperato:", token);
 
     if (!token) {
       setMessage("Utente non autenticato");
@@ -19,7 +18,7 @@ export default function UserProfile() {
     }
 
     axios
-      .get("/api/get-user-profile.php", {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/get-user-profile.php`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
