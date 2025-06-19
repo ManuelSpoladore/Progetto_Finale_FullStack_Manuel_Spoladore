@@ -6,7 +6,7 @@ export default function Hero() {
       <div className="relative text-center overflow-hidden">
         {/* Immagine hero */}
         <img
-          src="/public/orientamento2.jpeg"
+          src="/orientamento2.jpeg"
           alt="persona disegnata che non sa dove andare"
           className="w-full h-auto object-cover max-h-[90vh] blur-xs "
         />

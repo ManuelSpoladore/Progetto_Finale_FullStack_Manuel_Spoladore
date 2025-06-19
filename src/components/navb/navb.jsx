@@ -45,7 +45,7 @@ return (
         <div className="flex items-center sm:hidden gap-2">
           <Link to="/">
           <img
-            src="/public/logo-SR-nero.png"
+            src="/logo-SR-nero.png"
             alt="Logo mobile"
             className="h-10 w-auto block sm:hidden"
           />
@@ -67,7 +67,7 @@ return (
         <div className="flex items-center gap-8">
           <Link to="/">
           <img
-            src="/public/logo-SR-nero.png"
+            src="/logo-SR-nero.png"
             alt="Logo"
             className="h-14 w-auto hidden sm:block"
           />
