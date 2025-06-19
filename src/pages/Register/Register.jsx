@@ -20,11 +20,27 @@ export default function RegisterForm() {
   const [universities, setUniversities] = useState([]);
   const [faculties, setFaculties] = useState([]);
 
+  // useEffect(() => {
+  //   axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-universities.php`).then((res) => {
+  //     setUniversities(res.data);
+  //   });
+  // }, []);
+
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-universities.php`).then((res) => {
+  const url = `${import.meta.env.VITE_BACKEND_URL}/get-universities.php`;
+  console.log("🎯 Chiamata a:", url);
+
+  axios
+    .get(url)
+    .then((res) => {
+      console.log("📦 Università ricevute:", res.data);
       setUniversities(res.data);
+    })
+    .catch((err) => {
+      console.error("❌ Errore caricamento università:", err);
     });
-  }, []);
+}, []);
+
 
   useEffect(() => {
     if (formData.university_id) {
