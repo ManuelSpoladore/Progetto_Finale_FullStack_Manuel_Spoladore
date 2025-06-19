@@ -92,6 +92,7 @@ npm run dev
 | `/api/get-user-profile.php` | GET    | Restituisce i dati dell'utente |
 | `/api/create-post.php`      | POST   | Crea un nuovo post social      |
 | `/api/get-post.php`         | GET    | Recupera i post, con filtri    |
+| `/api/contact.php`          | POST   | Invia messaggi di contatto     |
 
 ---
 
