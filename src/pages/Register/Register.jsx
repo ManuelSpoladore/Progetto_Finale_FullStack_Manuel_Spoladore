@@ -21,7 +21,7 @@ export default function RegisterForm() {
   const [faculties, setFaculties] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/get-universities.php").then((res) => {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-universities.php`).then((res) => {
       setUniversities(res.data);
     });
   }, []);
@@ -29,7 +29,7 @@ export default function RegisterForm() {
   useEffect(() => {
     if (formData.university_id) {
       axios
-        .get(`/api/get-faculties.php?university_id=${formData.university_id}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/get-faculties.php?university_id=${formData.university_id}`)
         .then((res) => setFaculties(res.data));
     } else {
       setFaculties([]);
