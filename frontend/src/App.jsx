@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import Navb from "./components/navb/navb";
-import Foot from "./components/footer/foot";
+import Foot from "./components/footer/Foot";
 import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import Privacy from "./pages/Privacy/Privacy";
