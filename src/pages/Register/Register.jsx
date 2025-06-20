@@ -27,7 +27,7 @@ export default function RegisterForm() {
   // }, []);
 
   useEffect(() => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/debug-headers.php`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/debug-header.php`;
   console.log("🎯 Chiamata a:", url);
 
   axios
