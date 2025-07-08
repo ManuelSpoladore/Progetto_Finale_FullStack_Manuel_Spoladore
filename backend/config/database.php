@@ -4,7 +4,7 @@ header('Content-Type: application/json');
 
 
 $host = 'localhost';               
-$user = 'manuel';                 
+$user = 'u266883361_manuel';                 
 $password = 'Ciao2301!';    
 $dbname = 'u266883361_scuolaribelle'; 
 
