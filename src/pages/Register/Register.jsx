@@ -27,7 +27,7 @@ export default function RegisterForm() {
   // }, []);
 
   useEffect(() => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/debug-header.php`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/get-universities.php`;
   console.log("🎯 Chiamata a:", url);
 
   axios

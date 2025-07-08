@@ -1,3 +1,12 @@
-<IfModule mod_headers.c>
-    SetEnvIf Authorization "(.*)" HTTP_AUTHORIZATION=$1
-</IfModule>
+# Impedisci accesso ai file .env
+<Files .env>
+  Order allow,deny
+  Deny from all
+</Files>
+
+# Impedisci accesso a Composer e ad altri file sensibili
+<FilesMatch "^(composer\.json|composer\.lock|\.env|\.git|\.htaccess)$">
+  Order allow,deny
+  Deny from all
+</FilesMatch>
+

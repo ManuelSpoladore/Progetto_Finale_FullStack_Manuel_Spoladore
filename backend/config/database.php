@@ -3,10 +3,10 @@
 header('Content-Type: application/json');
 
 
-$host = 'sql309.infinityfree.com';               
-$user = 'if0_39269908';                 
-$password = 'patturetto123';    
-$dbname = 'if0_39269908_scuolaribelle'; 
+$host = 'localhost';               
+$user = 'manuel';                 
+$password = 'Ciao2301!';    
+$dbname = 'u266883361_scuolaribelle'; 
 
 $conn = new mysqli($host, $user, $password, $dbname);
 
