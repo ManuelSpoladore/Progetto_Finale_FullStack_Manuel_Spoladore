@@ -11,6 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/configjwt.php';
 
 // input JSON
 $input = json_decode(file_get_contents('php://input'), true);

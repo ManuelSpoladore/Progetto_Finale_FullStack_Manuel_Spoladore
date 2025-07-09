@@ -18,6 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../config/configjwt.php';
+
 
 if (!$conn) {
     echo json_encode(['success' => false, 'message' => 'Errore di connessione al database']);
