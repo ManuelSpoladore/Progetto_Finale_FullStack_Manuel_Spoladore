@@ -1,5 +1,5 @@
 <?php
-
+file_put_contents('php://stderr', "Metodo usato: " . $_SERVER['REQUEST_METHOD'] . PHP_EOL);
 header("Access-Control-Allow-Origin: https://scuolaribelle.netlify.app");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
@@ -38,7 +38,7 @@ if (empty($name) || empty($username) || empty($mail) || empty($textMessage)) {
     exit;
 }
 
-$stmt = $conn->prepare("INSERT INTO contact_messages (name, username, mail, textMessage) VALUES (?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO contact (name, username, mail, textMessage) VALUES (?, ?, ?, ?)");
 if (!$stmt) {
     echo json_encode(['success' => false, 'message' => 'Errore nella query insert']);
     exit;
