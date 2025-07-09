@@ -53,7 +53,7 @@ export default function GuidaUniversita() {
             3. <strong>Valutare l’ateneo e i servizi</strong>
           </h2>
           <p>
-            Non tutte le <strong>università</strong> sono uguali: alcune puntano di più sulla
+            Non tutte le <strong>università</strong> sono uguali: alcune puntano di più sulla 
             <strong>ricerca</strong>, altre sulle <strong>collaborazioni con il mondo del lavoro</strong>.
           </p>
           <p><strong>Verifica aspetti</strong> come:</p>
