@@ -101,7 +101,7 @@ export default function GuidaUniversita() {
             <strong>Scegliere l’università</strong> non è un quiz con una sola risposta corretta.
             È un <strong>percorso personale</strong> che richiede <strong>riflessione</strong>, <strong>ascolto</strong> e un
             pizzico di <strong>coraggio</strong>. <strong>Informarsi</strong>, <strong>chiedere</strong> e <strong>prendersi il tempo</strong>
-            giusto sono già segnali di <strong>maturità</strong>. Qualsiasi strada sceglierai,
+             giusto sono già segnali di <strong>maturità</strong>. Qualsiasi strada sceglierai,
             che sia lineare o piena di curve, sarà parte della tua <strong>crescita</strong>.
           </p>
         </article>
