@@ -98,7 +98,7 @@ export default function Contact() {
             {/* TextArea */}
             <div>
               <label htmlFor="email" className="block mb-1 font-bold">
-                Email
+                Messaggio
               </label>
               <textarea
                 type="text"
