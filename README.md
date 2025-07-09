@@ -33,10 +33,6 @@ Scuola Ribelle è una piattaforma di orientamento universitario che permette agl
 
 /backend
 ├── /config         # Connessione al DB e variabili di configurazione
-├── /controllers    # Logica dei controller (es. CourseController.php)
-├── /models         # Modelli dati (es. course.php)
-├── /routes         # Routing custom lato PHP
-├── /public         # Endpoint API accessibili da frontend
 └── /vendor         # Librerie installate via Composer (es. firebase/php-jwt)
 ```
 
@@ -160,11 +156,24 @@ CREATE TABLE posts (
     FOREIGN KEY (university_id) REFERENCES universities(id) ON DELETE CASCADE,
     FOREIGN KEY (faculty_id) REFERENCES faculties(id) ON DELETE CASCADE
 );
+
+
+-- Form Contatti
+CREATE TABLE contact (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    username VARCHAR(100) NOT NULL,
+    mail VARCHAR(150) NOT NULL,
+    textMessage TEXT NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 ```
 
 ### Dati di esempio
 
 ```sql
+
 -- Università
 INSERT INTO universities (name) VALUES
 ('Università degli Studi di Milano'),
@@ -224,12 +233,6 @@ INSERT INTO faculties (name, university_id) VALUES
 - [ ] Sistema di valutazione corsi
 
 - [ ] Mobile app con React Native
-
----
-
-## 📄 Licenza
-
-Distribuito sotto licenza MIT. Vedi `LICENSE` per maggiori informazioni.
 
 ---
 
