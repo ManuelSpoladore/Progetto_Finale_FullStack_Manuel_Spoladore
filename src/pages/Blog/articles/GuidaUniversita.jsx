@@ -86,7 +86,7 @@ export default function GuidaUniversita() {
           </h2>
           <p>
             Una <strong>scelta universitaria</strong> non è irreversibile. <strong>Cambiare corso</strong>, <strong>ateneo</strong>
-            o persino <strong>ambito</strong> è possibile e talvolta necessario. Molti studenti
+             o persino <strong>ambito</strong> è possibile e talvolta necessario. Molti studenti
             trovano la loro <strong>strada</strong> dopo uno o due tentativi.
           </p>
           <p className="italic">
