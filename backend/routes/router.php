@@ -5,6 +5,7 @@ require_once __DIR__ . '/../controllers/AuthController.php';
 require_once __DIR__ . '/../controllers/PostController.php';
 require_once __DIR__ . '/../controllers/ContentController.php';
 require_once __DIR__ . '/../controllers/ContactController.php';
+require_once __DIR__ . '/../controllers/UserController.php'; 
 require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -42,7 +43,7 @@ elseif ($uri === '/api/posts' && $method === 'GET') {
 // ✅ ROTTA PER INVIARE UN POST (protetta da JWT)
 elseif ($uri === '/api/posts' && $method === 'POST') {
     $user_id = $authMiddleware->authenticate();
-    if (!$user_id) return; // blocca se token non valido
+    if (!$user_id) return;
 
     PostController::create($conn, $user_id);
 }
@@ -51,6 +52,15 @@ elseif ($uri === '/api/posts' && $method === 'POST') {
 elseif ($uri === '/api/send-contact-message' && $method === 'POST') {
     $controller = new ContactController($conn);
     $controller->sendMessage();
+}
+
+// ✅ ROTTE USER PROTETTE DA JWT
+elseif ($uri === '/api/user/profile' && $method === 'GET') {
+    $user_id = $authMiddleware->authenticate();
+    if (!$user_id) return;
+
+    $controller = new UserController($conn);
+    $controller->getProfile($user_id);
 }
 
 // ❌ ROTTA NON TROVATA

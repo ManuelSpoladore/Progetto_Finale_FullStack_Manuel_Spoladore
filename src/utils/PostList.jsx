@@ -10,7 +10,7 @@ export default function PostList() {
   const [selectedFaculty, setSelectedFaculty] = useState("");
 
   const PostsLoader = async () => {
-    let url = `${import.meta.env.VITE_BACKEND_URL}/get-post.php`;
+    let url = `${import.meta.env.VITE_BACKEND_URL}/api/posts`;
     const params = [];
 
     if (selectedUniversity) params.push(`university_id=${selectedUniversity}`);
@@ -32,7 +32,7 @@ export default function PostList() {
   }, []);
 
   useEffect(() => {
-    axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-universities.php`).then((res) => {
+    axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/universities`).then((res) => {
       setUniversities(res.data);
     });
   }, []);
@@ -40,7 +40,7 @@ export default function PostList() {
   useEffect(() => {
     if (selectedUniversity) {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/get-faculties.php?university_id=${selectedUniversity}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/api/faculties?university_id=${selectedUniversity}`)
         .then((res) => setFaculties(res.data));
     } else {
       setFaculties([]);

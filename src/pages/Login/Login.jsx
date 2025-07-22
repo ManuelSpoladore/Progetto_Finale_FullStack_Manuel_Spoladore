@@ -27,7 +27,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/login.php`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, formData);
 
       console.log(response.data);
 
@@ -36,7 +36,7 @@ export default function Login() {
         saveToken(token);
         console.log("Token salvato:", token);
 
-        const profileRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/get-user-profile.php`, {
+        const profileRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
