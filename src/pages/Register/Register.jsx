@@ -27,7 +27,7 @@ export default function RegisterForm() {
   // }, []);
 
   useEffect(() => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/get-universities.php`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/api/universities.php`;
   console.log("🎯 Chiamata a:", url);
 
   axios
@@ -45,7 +45,7 @@ export default function RegisterForm() {
   useEffect(() => {
     if (formData.university_id) {
       axios
-        .get(`${import.meta.env.VITE_BACKEND_URL}/get-faculties.php?university_id=${formData.university_id}`)
+        .get(`${import.meta.env.VITE_BACKEND_URL}/api/faculties?university_id=${formData.university_id}`)
         .then((res) => setFaculties(res.data));
     } else {
       setFaculties([]);
@@ -62,7 +62,7 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/register.php`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/register`, formData);
       if (response.data.success) {
         setMessage("Registrazione completata! Verrai reindirizzato al Login");
         const timer = setTimeout(() => {
