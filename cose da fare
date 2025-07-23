@@ -1,3 +1,175 @@
+caricare backend su hostinger
+aggiungere loader post contatti
+provare a vedere se il tutto funziona
+
+
+Sto provando a registrarmi su scuolaribelle, ma la console mi dà questo errore: index-CMD5XAlg.js:77 🎯 Chiamata a: https://scuolaribelle.fun/backend/api/api/universities.php
+register:1 Access to XMLHttpRequest at 'https://scuolaribelle.fun/backend/api/api/universities.php' from origin 'https://scuolaribelle.netlify.app' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+index-CMD5XAlg.js:77 ❌ Errore caricamento università: fe
+(anonymous) @ index-CMD5XAlg.js:77
+scuolaribelle.fun/backend/api/api/universities.php:1  Failed to load resource: net::ERR_FAILED
+
+I file di registrazione sono: authcontroller: 
+
+<?php
+require_once __DIR__ . '/../config/database.php';
+
+class AuthController {
+    public static function register() {
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        $name = $input['name'] ?? '';
+        $surname = $input['surname'] ?? '';
+        $username = $input['username'] ?? '';
+        $mail = $input['mail'] ?? '';
+        $password = $input['password'] ?? '';
+        $university = $input['university_id'] ?? '';
+        $faculty = $input['faculty_id'] ?? '';
+
+        if (empty($name) || empty($surname) || empty($username) || empty($mail) || empty($password) || empty($university) || empty($faculty)) {
+            echo json_encode(['success' => false, 'message' => 'Tutti i campi sono obbligatori']);
+            return;
+        }
+
+        if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+            echo json_encode(['success' => false, 'message' => 'Indirizzo mail non valido']);
+            return;
+        }
+
+        global $conn;
+
+        // Controlla email
+        $stmt = $conn->prepare("SELECT id FROM users WHERE mail = ?");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'message' => 'Errore nella query email']);
+            return;
+        }
+        $stmt->bind_param("s", $mail);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            echo json_encode(['success' => false, 'message' => 'Email già registrata']);
+            return;
+        }
+        $stmt->close();
+
+        // Controlla username
+        $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'message' => 'Errore nella query username']);
+            return;
+        }
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->store_result();
+        if ($stmt->num_rows > 0) {
+            echo json_encode(['success' => false, 'message' => 'Username già registrato']);
+            return;
+        }
+        $stmt->close();
+
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+        $stmt = $conn->prepare("INSERT INTO users (name, surname, username, mail, password, university_id, faculty_id) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'message' => 'Errore nella query insert']);
+            return;
+        }
+
+        $stmt->bind_param("sssssss", $name, $surname, $username, $mail, $hashed_password, $university, $faculty);
+
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true, 'message' => 'Registrazione completata']);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Errore durante la registrazione']);
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+
+    public function login()
+    {
+        header("Access-Control-Allow-Origin: https://scuolaribelle.netlify.app");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization");
+        header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
+        header("Content-Type: application/json");
+
+        if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+            http_response_code(200);
+            exit;
+        }
+
+        global $conn; 
+
+        $input = json_decode(file_get_contents('php://input'), true);
+
+        $username = $input['username'] ?? '';
+        $password = $input['password'] ?? '';
+
+        if (empty($username) || empty($password)) {
+            echo json_encode(['success' => false, 'message' => 'Inserisci username e password']);
+            return;
+        }
+
+        $stmt = $conn->prepare("
+            SELECT u.id, u.username, u.password,
+                   u.university_id, u.faculty_id,
+                   un.name AS university,
+                   f.name AS faculty
+            FROM users u
+            JOIN universities un ON u.university_id = un.id
+            JOIN faculties f ON u.faculty_id = f.id
+            WHERE u.username = ?
+        ");
+        if (!$stmt) {
+            echo json_encode(['success' => false, 'message' => 'Errore SQL: ' . $conn->error]);
+            return;
+        }
+
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows === 0) {
+            echo json_encode(['success' => false, 'message' => 'Utente non trovato']);
+            return;
+        }
+
+        $user = $result->fetch_assoc();
+
+        if (password_verify($password, $user['password'])) {
+            $key = $_ENV['JWT_SECRET'];
+            $payload = [
+                "user_id" => $user['id'],
+                "username" => $username,
+                "university" => $user['university'],
+                "faculty" => $user['faculty'],
+                "university_id" => $user['university_id'],
+                "faculty_id" => $user['faculty_id'],
+                "exp" => time() + 3600
+            ];
+            $jwt = JWT::encode($payload, $key, 'HS256');
+
+            echo json_encode([
+                'success' => true,
+                'token' => $jwt,
+                'message' => 'Login riuscito'
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Password errata']);
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
+
+   
+}
+
+
+register.jsx:
+
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -27,7 +199,7 @@ export default function RegisterForm() {
   // }, []);
 
   useEffect(() => {
-  const url = `${import.meta.env.VITE_BACKEND_URL}/api/universities`;
+  const url = `${import.meta.env.VITE_BACKEND_URL}/api/universities.php`;
   console.log("🎯 Chiamata a:", url);
 
   axios
@@ -230,3 +402,6 @@ export default function RegisterForm() {
     </PageWrapper>
   );
 }
+
+
+Se ti servono altri file dimmi:
