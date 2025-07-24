@@ -10,12 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Config e JWT
+// Config and JWT
 require_once __DIR__ . '/../config/configjwt.php';
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../vendor/autoload.php';
 
-// Middleware per autenticazione
+// Middleware 
 require_once __DIR__ . '/../middleware/AuthMiddleware.php';
 
 // Controller
@@ -28,10 +28,8 @@ require_once __DIR__ . '/../controllers/PostController.php';
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $method = $_SERVER['REQUEST_METHOD'];
 
-// Normalizza URI: rimuove prefissi superflui
 $uri = str_replace(['/backend/api', '/backend'], '', $uri);
 
-// ROUTE PUBBLICHE
 if ($uri === '/register' && $method === 'POST') {
     AuthController::register();
 } elseif ($uri === '/login' && $method === 'POST') {
@@ -57,7 +55,6 @@ if ($uri === '/register' && $method === 'POST') {
     $content->getPosts($university_id, $faculty_id);
 }
 
-// ROUTE PROTETTE
 elseif ($uri === '/user-profile' && $method === 'GET') {
     $user_id = getAuthenticatedUserId();
     UserController::getUserProfile();
@@ -66,7 +63,6 @@ elseif ($uri === '/user-profile' && $method === 'GET') {
     PostController::create($conn, $user_id);
 }
 
-// ROUTE NON TROVATA
 else {
     http_response_code(404);
     echo json_encode(['success' => false, 'message' => 'Endpoint non trovato']);

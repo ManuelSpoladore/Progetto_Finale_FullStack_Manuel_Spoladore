@@ -29,7 +29,7 @@ class AuthController {
 
         global $conn;
 
-        // Controlla email
+        // Check email
         $stmt = $conn->prepare("SELECT id FROM users WHERE mail = ?");
         if (!$stmt) {
             echo json_encode(['success' => false, 'message' => 'Errore nella query email']);
@@ -44,7 +44,7 @@ class AuthController {
         }
         $stmt->close();
 
-        // Controlla username
+        // Check username
         $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
         if (!$stmt) {
             echo json_encode(['success' => false, 'message' => 'Errore nella query username']);
