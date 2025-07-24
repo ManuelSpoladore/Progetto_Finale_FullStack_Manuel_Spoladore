@@ -22,6 +22,8 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setMessage("");
+
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
@@ -29,22 +31,24 @@ export default function Contact() {
       );
 
       if (response.data.success) {
-        setMessage("Messaggio inviato con successo");
         setContactForm({
           name: "",
           username: "",
           mail: "",
           textMessage: "",
         });
-        setLoading(false);
+        setMessage("Messaggio inviato con successo");
       } else {
         setMessage(response.data.message || "Errore nell'invio");
-        setLoading(false);
       }
     } catch (error) {
-      setMessage("Errore di connesione col server");
-      setLoading(false);
       console.error(error);
+      setMessage("Errore di connesione col server");
+    } finally {
+      // 👇 forza il re-render separando lo spegnimento del loader
+      setTimeout(() => {
+        setLoading(false);
+      }, 300);
     }
   };
 
@@ -55,7 +59,6 @@ export default function Contact() {
           <div className="text-3xl font-bold mb-6 text-center">Contattaci</div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            {/* Name  */}
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
                 <label htmlFor="fname" className="block mb-1 font-bold">
@@ -71,7 +74,6 @@ export default function Contact() {
                   required
                 />
               </div>
-              {/* Username  */}
               <div className="flex-1">
                 <label htmlFor="username" className="block mb-1 font-bold">
                   Nome Utente
@@ -88,7 +90,6 @@ export default function Contact() {
               </div>
             </div>
 
-            {/* Email */}
             <div>
               <label htmlFor="email" className="block mb-1 font-bold">
                 Email
@@ -104,13 +105,11 @@ export default function Contact() {
               />
             </div>
 
-            {/* TextArea */}
             <div>
-              <label htmlFor="email" className="block mb-1 font-bold">
+              <label htmlFor="textMessage" className="block mb-1 font-bold">
                 Messaggio
               </label>
               <textarea
-                type="text"
                 name="textMessage"
                 className="w-full p-2 border border-gray-300 rounded"
                 placeholder="Scrivi il tuo messaggio"
@@ -119,19 +118,27 @@ export default function Contact() {
                 required
               />
             </div>
+
+            {/* Spinner */}
             {loading && (
-              <div className="flex justify-center items-center">
+              <div className="flex justify-center items-center py-2">
                 <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-red-500"></div>
               </div>
             )}
 
+            {/* Messaggio */}
             {message && (
-              <div className="text-center text-red-700 font-bold">
+              <div
+                className={`text-center font-bold ${
+                  message.includes("successo")
+                    ? "text-green-600"
+                    : "text-red-700"
+                }`}
+              >
                 {message}
               </div>
             )}
 
-            {/* Button */}
             <div className="pt-2 flex justify-center">
               <button
                 type="submit"
@@ -142,6 +149,7 @@ export default function Contact() {
                     : "bg-red-500 hover:bg-black hover:text-white cursor-pointer text-white"
                 }`}
               >
+                {/* 👇 Risolto: il testo torna "Invia" dopo il caricamento */}
                 {loading ? "Invio..." : "Invia"}
               </button>
             </div>
