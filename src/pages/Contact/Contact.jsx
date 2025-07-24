@@ -45,7 +45,6 @@ export default function Contact() {
       console.error(error);
       setMessage("Errore di connesione col server");
     } finally {
-      // 👇 forza il re-render separando lo spegnimento del loader
       setTimeout(() => {
         setLoading(false);
       }, 300);
@@ -149,7 +148,6 @@ export default function Contact() {
                     : "bg-red-500 hover:bg-black hover:text-white cursor-pointer text-white"
                 }`}
               >
-                {/* 👇 Risolto: il testo torna "Invia" dopo il caricamento */}
                 {loading ? "Invio..." : "Invia"}
               </button>
             </div>
