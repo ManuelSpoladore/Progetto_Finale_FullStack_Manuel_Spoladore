@@ -83,11 +83,11 @@ npm run dev
 
 | Endpoint                    | Metodo | Descrizione                    |
 | --------------------------- | ------ | ------------------------------ |
-| `/api/register.php`         | POST   | Registra un nuovo utente       |
-| `/api/login.php`            | POST   | Login e generazione token JWT  |
-| `/api/get-user-profile.php` | GET    | Restituisce i dati dell'utente |
-| `/api/create-post.php`      | POST   | Crea un nuovo post social      |
-| `/api/get-post.php`         | GET    | Recupera i post, con filtri    |
+| `/api/register`             | POST   | Registra un nuovo utente       |
+| `/api/login`                | POST   | Login e generazione token JWT  |
+| `/api/user-profile`         | GET    | Restituisce i dati dell'utente |
+| `/api/posts`                | POST   | Crea un nuovo post social      |
+| `/api/posts`                | GET    | Recupera i post, con filtri    |
 | `/api/contact.php`          | POST   | Invia messaggi di contatto     |
 
 ---
