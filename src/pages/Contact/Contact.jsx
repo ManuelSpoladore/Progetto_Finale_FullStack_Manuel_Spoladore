@@ -21,7 +21,7 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/send-contact-message`, contactForm);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, contactForm);
       if (response.data.success) {
         setMessage("Messaggio inviato con successo");
         setContactForm({
