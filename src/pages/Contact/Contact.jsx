@@ -12,7 +12,6 @@ export default function Contact() {
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
-
   const handleChange = (e) => {
     setContactForm({
       ...contactForm,
@@ -28,7 +27,7 @@ export default function Contact() {
         `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
         contactForm
       );
-       
+
       if (response.data.success) {
         setMessage("Messaggio inviato con successo");
         setContactForm({
@@ -44,7 +43,7 @@ export default function Contact() {
       }
     } catch (error) {
       setMessage("Errore di connesione col server");
-        setLoading(false);
+      setLoading(false);
       console.error(error);
     }
   };
@@ -119,12 +118,12 @@ export default function Contact() {
                 onChange={handleChange}
                 required
               />
-              {loading && (
-                <div className="flex justify-center items-center">
-                  <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-red-500"></div>
-                </div>
-              )}
             </div>
+            {loading && (
+              <div className="flex justify-center items-center">
+                <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-red-500"></div>
+              </div>
+            )}
 
             {message && (
               <div className="text-center text-red-700 font-bold">
