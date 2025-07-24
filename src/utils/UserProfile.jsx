@@ -18,7 +18,7 @@ export default function UserProfile() {
     }
 
     axios
-      .get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
+      .get(`${import.meta.env.VITE_BACKEND_URL}/api/user-profile`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
