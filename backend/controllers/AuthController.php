@@ -1,5 +1,9 @@
 <?php
+
 require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../vendor/autoload.php';  
+
+use Firebase\JWT\JWT;  
 
 class AuthController {
     public static function register() {

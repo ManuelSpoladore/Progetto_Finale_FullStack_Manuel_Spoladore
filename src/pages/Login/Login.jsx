@@ -36,7 +36,7 @@ export default function Login() {
         saveToken(token);
         console.log("Token salvato:", token);
 
-        const profileRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user/profile`, {
+        const profileRes = await axios.get(`${import.meta.env.VITE_BACKEND_URL}/api/user-profile`, {
           headers: { Authorization: `Bearer ${token}` },
         });
 
