@@ -10,6 +10,8 @@ export default function Contact() {
     textMessage: "",
   });
   const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
 
   const handleChange = (e) => {
     setContactForm({
@@ -20,8 +22,13 @@ export default function Contact() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/contact`, contactForm);
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_URL}/api/contact`,
+        contactForm
+      );
+       
       if (response.data.success) {
         setMessage("Messaggio inviato con successo");
         setContactForm({
@@ -109,6 +116,11 @@ export default function Contact() {
                 onChange={handleChange}
                 required
               />
+              {loading && (
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-red-500"></div>
+                </div>
+              )}
             </div>
 
             {message && (
@@ -121,9 +133,14 @@ export default function Contact() {
             <div className="pt-2 flex justify-center">
               <button
                 type="submit"
-                className="w-full lg:w-auto px-4 py-2 bg-red-500 text-white font-bold rounded hover:bg-black hover:text-white transition hover:duration-700 hover:cursor-pointer"
+                disabled={loading}
+                className={`w-full lg:w-auto px-4 py-2 font-bold rounded transition duration-700 ${
+                  loading
+                    ? "bg-gray-400 cursor-not-allowed text-white"
+                    : "bg-red-500 hover:bg-black hover:text-white cursor-pointer text-white"
+                }`}
               >
-                Invia
+                {loading ? "Invio..." : "Invia"}
               </button>
             </div>
           </form>
