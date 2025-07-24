@@ -37,11 +37,14 @@ export default function Contact() {
           mail: "",
           textMessage: "",
         });
+        setLoading(false);
       } else {
         setMessage(response.data.message || "Errore nell'invio");
+        setLoading(false);
       }
     } catch (error) {
       setMessage("Errore di connesione col server");
+        setLoading(false);
       console.error(error);
     }
   };
