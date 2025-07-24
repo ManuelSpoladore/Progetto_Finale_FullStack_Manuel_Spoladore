@@ -27,7 +27,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, formData);
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/login`, formData);
 
       console.log(response.data);
 

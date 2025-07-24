@@ -1,7 +1,5 @@
 <?php
-
-require_once __DIR__ . '/../models/Post.php';
-
+require_once __DIR__ . '/../config/database.php';
 class PostController {
     public static function create($conn, $user_id) {
         $data = json_decode(file_get_contents("php://input"));

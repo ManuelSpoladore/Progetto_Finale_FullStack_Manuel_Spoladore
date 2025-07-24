@@ -1,4 +1,9 @@
 RewriteEngine On
+RewriteBase /backend/
+
+# Permetti accesso ai file esistenti (immagini, css, js)
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Reindirizza tutto a index.php
 RewriteRule ^ index.php [QSA,L]
